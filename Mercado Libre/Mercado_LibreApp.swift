@@ -11,7 +11,7 @@ import SwiftUI
 struct Mercado_LibreApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ProductSearchView()
         }
     }
 }
