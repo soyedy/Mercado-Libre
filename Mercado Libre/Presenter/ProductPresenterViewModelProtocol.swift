@@ -9,16 +9,24 @@ import Foundation
 
 @MainActor
 protocol ProductPresenterViewModelProtocol {
+  var localizable: ProductLocalizables { get }
   var productList: [Product] { get set }
   func fetchProducts(withName name: String) async throws
 }
 
-class ProductViewModel: ProductPresenterViewModelProtocol, ObservableObject {
-  var productService = ProductService()
+final class ProductViewModel: ProductPresenterViewModelProtocol, ObservableObject {
+  var localizable: ProductLocalizables
+  var productService: ProductService
   @Published var productList: [Product] = [Product]()
+  
+  init(localizable: ProductLocalizables, fetchProductService: ProductService) {
+    self.localizable = localizable
+    self.productService = fetchProductService
+  }
   
   func fetchProducts(withName name: String) async throws {
     let productsList: [Product] = try await productService.search(with: name)
     self.productList = productsList
   }
 }
+

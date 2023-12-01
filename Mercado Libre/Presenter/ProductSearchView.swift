@@ -9,27 +9,21 @@ import SwiftUI
 
 struct ProductSearchView: View {
   @State private var searchText: String = ""
-  @ObservedObject private var viewModel = ProductViewModel()
+  @ObservedObject private var viewModel: ProductViewModel
+  
+  init(viewModel: ProductViewModel) {
+    self.viewModel = viewModel
+  }
   
   var body: some View {
     NavigationView {
       ZStack {
         VStack {
-          TextField("Buscar en Mercado Libre", text: $searchText)
-            .padding(7)
-            .background(Color(.systemGray6))
-            .cornerRadius(8)
-            .padding(.horizontal, 10)
-          List {
-            ForEach(viewModel.productList.filter({ searchText.isEmpty ? true : $0.title.lowercased().contains(searchText.lowercased()) }), id: \.id) { product in
-              ProductView(title: product.title,
-                          price: product.price,
-                          imageUrl: URL(string: product.thumbnail)
-              )
-            }
-          }
+          SearchProductTextfieldView(placeholder: viewModel.localizable.searchTextfieldTitle, text: $searchText)
+          ProductListView(viewModel: viewModel, searchText: $searchText)
         }
       }
+      .navigationTitle(viewModel.localizable.productViewTitle)
       .background(Color.yellow)
     }
     .onChange(of: searchText) { newText in
@@ -45,32 +39,4 @@ struct ProductSearchView: View {
 }
 
 
-struct ProductView: View {
-  var title: String
-  var price: Double
-  var imageUrl: URL?
-  
-  var body: some View {
-    VStack(alignment: .leading) {
-      if let imgUrl = imageUrl {
-        AsyncImage(url: imgUrl) { phase in
-          switch phase {
-          case .empty:
-            ProgressView()
-          case .success(let image):
-            image.resizable()
-          case .failure:
-            Image(systemName: "photo")
-          @unknown default:
-            EmptyView()
-          }
-        }
-      } else {
-        Image(systemName: "photo")
-      }
-      Text(title)
-      Text(String(price))
-    }
-  }
-}
 
