@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  Mercado Libre
+
+  Created by John Edward Narvaez Londono on 30/11/23.
+  
+*/
+"ProductViewTitle" = "Mercado Libre";
+"SearchTextfieldTitle" = "Buscar en Mercado Libre";

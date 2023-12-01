@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct Mercado_LibreApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ProductSearchView()
-        }
+  var body: some Scene {
+    WindowGroup {
+      let productViewModel: ProductViewModel =
+      ProductViewModel(localizable: ProductLocalizables(),
+                       fetchProductService: ProductService()
+      )
+      ProductSearchView(viewModel: productViewModel)
     }
+  }
 }
