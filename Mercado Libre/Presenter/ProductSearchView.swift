@@ -20,10 +20,12 @@ struct ProductSearchView: View {
       ZStack {
         VStack {
           SearchProductTextfieldView(placeholder: viewModel.localizable.searchTextfieldTitle, text: $searchText)
+          Text(Cache.shared.userAddress)
           ProductListView(viewModel: viewModel, searchText: $searchText)
+
         }
       }
-      .navigationTitle(viewModel.localizable.productViewTitle)
+      //.navigationTitle(viewModel.localizable.productViewTitle)
       .background(Color.yellow)
     }
     .onChange(of: searchText) { newText in
