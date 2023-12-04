@@ -1,12 +1,12 @@
 //
-//  ViewModifiers.swift
+//  FirstLaunchView.swift
 //  Mercado Libre
 //
-//  Created by John Edward Narvaez Londono on 30/11/23.
+//  Created by John Edward Narvaez Londono on 4/12/23.
 //
 
-import SwiftUI
 import Foundation
+import SwiftUI
 
 struct FirstLaunchView: View {
   @Binding var shouldBeShowing: Bool
@@ -50,7 +50,3 @@ struct FirstLaunchView: View {
     Cache.shared.shouldIntroduceUser = false
   }
 }
-
-
-
-

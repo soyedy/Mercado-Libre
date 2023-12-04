@@ -8,13 +8,13 @@
 import Foundation
 
 @MainActor
-protocol ProductPresenterViewModelProtocol {
+protocol ProductViewModelProtocol {
   var localizable: ProductLocalizables { get }
   var productList: [Product] { get set }
   func fetchProducts(withName name: String) async throws
 }
 
-final class ProductViewModel: ProductPresenterViewModelProtocol, ObservableObject {
+final class ProductViewModel: ProductViewModelProtocol, ObservableObject {
   var localizable: ProductLocalizables
   var productService: ProductService
   @Published var productList: [Product] = [Product]()

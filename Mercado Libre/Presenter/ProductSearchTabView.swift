@@ -33,7 +33,7 @@ struct ProductSearchView: View {
         do {
           try await viewModel.fetchProducts(withName: newText)
         } catch {
-          print("error fetching")
+          print(ServiceError.serviceFailedFetching)
         }
       }
     }

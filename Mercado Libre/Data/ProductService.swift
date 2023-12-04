@@ -11,6 +11,10 @@ protocol Searchable {
   func search(with: String) async throws -> [Product]
 }
 
+enum ServiceError: Error {
+  case serviceFailedFetching
+}
+
 class ProductService: Searchable, ObservableObject {
   
   func search(with product: String) async throws -> [Product] {
@@ -22,9 +26,13 @@ class ProductService: Searchable, ObservableObject {
     
     let (data, _) = try await URLSession.shared.data(for: request)
     let decoder = JSONDecoder()
-    let searchResponseDTO = try decoder.decode(ProductDTO.self, from: data)
-    let productsList: [Product] = searchResponseDTO.results
-    return productsList
+    do {
+      let searchResponseDTO = try decoder.decode(ProductDTO.self, from: data)
+      let productsList: [Product] = searchResponseDTO.results
+      return productsList
+    } catch {
+      throw ServiceError.serviceFailedFetching
+    }
   }
 }
 
