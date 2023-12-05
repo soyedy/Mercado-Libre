@@ -3,4 +3,84 @@
    uuid = "4F360CC4-63A4-40A9-816C-BC2299A2AE90"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CC3CF0D2-2D75-4AB9-9CD2-8F5D6FDC0BC7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mercado Libre/Data/ProductService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "search(with:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CC3CF0D2-2D75-4AB9-9CD2-8F5D6FDC0BC7 - cd39a9a384d76ece"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Mercado_Libre.ProductService.search(with: Swift.String) async throws -&gt; Swift.Array&lt;Mercado_Libre.Product&gt;"
+                  moduleName = "Mercado Libre"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/john.narvaez/Desktop/Mercado%20Libre/Mercado%20Libre/Data/ProductService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "1284">
+               </Location>
+               <Location
+                  uuid = "CC3CF0D2-2D75-4AB9-9CD2-8F5D6FDC0BC7 - 3094dc045ffe08cf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Mercado_Libre.ProductService.search(with: Swift.String) async throws -&gt; Swift.Array&lt;Mercado_Libre.Product&gt;"
+                  moduleName = "Mercado Libre"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/john.narvaez/Desktop/Mercado%20Libre/Mercado%20Libre/Data/ProductService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "324">
+               </Location>
+               <Location
+                  uuid = "CC3CF0D2-2D75-4AB9-9CD2-8F5D6FDC0BC7 - cd39a9a384d76ece"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Mercado_Libre.ProductService.search(with: Swift.String) async throws -&gt; Swift.Array&lt;Mercado_Libre.Product&gt;"
+                  moduleName = "Mercado Libre"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/john.narvaez/Desktop/Mercado%20Libre/Mercado%20Libre/Data/ProductService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "1643">
+               </Location>
+               <Location
+                  uuid = "CC3CF0D2-2D75-4AB9-9CD2-8F5D6FDC0BC7 - 3094dc045ffe08cf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Mercado_Libre.ProductService.search(with: Swift.String) async throws -&gt; Swift.Array&lt;Mercado_Libre.Product&gt;"
+                  moduleName = "Mercado Libre"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/john.narvaez/Desktop/Mercado%20Libre/Mercado%20Libre/Data/ProductService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "343">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -31,7 +31,7 @@ class Cache {
     set { UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.userCountry.rawValue )}
   }
   
-  func saveDefault(forKey key: String, value: Any) -> Any {
+  func saveDefault(forKey key: String, value: Any) {
     return UserDefaults.standard.set(value, forKey: key)
   }
   

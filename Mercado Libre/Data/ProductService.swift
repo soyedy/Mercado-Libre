@@ -7,33 +7,41 @@
 
 import Foundation
 
-protocol Searchable {
-  func search(with: String) async throws -> [Product]
-}
-
 enum ServiceError: Error {
   case serviceFailedFetching
+  case invalidUrlRequest
+  case internalError
 }
 
-class ProductService: Searchable, ObservableObject {
+protocol Searchable: ObservableObject {
+  func search(with query: String) async throws -> [Product]
+}
+
+class ProductService: Searchable {
+  @Published var isLoading = false
   
-  func search(with product: String) async throws -> [Product] {
-    
-    guard let baseUrl: URL = Constants.URLs.search(with: product) else { return [Product]() }
-    var request = URLRequest(url: baseUrl)
+  func search(with query: String) async throws -> [Product] {
+    guard let baseURL = Constants.URLs.search(with: query.lowercased()) else {
+      throw ServiceError.invalidUrlRequest
+    }
+    print(baseURL)
+    var request = URLRequest(url: baseURL)
     request.httpMethod = "GET"
-    request.addValue("Bearer ", forHTTPHeaderField: "Authorization")
+    request.addValue("Bearer YOUR_TOKEN_HERE", forHTTPHeaderField: "Authorization")
     
-    let (data, _) = try await URLSession.shared.data(for: request)
-    let decoder = JSONDecoder()
+    isLoading = true
+    defer { isLoading = false }
+    
     do {
+      let (data, _) = try await URLSession.shared.data(for: request)
+      let decoder = JSONDecoder()
+        
       let searchResponseDTO = try decoder.decode(ProductDTO.self, from: data)
       let productsList: [Product] = searchResponseDTO.results
       return productsList
+      
     } catch {
       throw ServiceError.serviceFailedFetching
     }
   }
 }
-
-

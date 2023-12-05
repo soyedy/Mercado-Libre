@@ -9,7 +9,8 @@ import SwiftUI
 
 @main
 struct Mercado_LibreApp: App {
-  @State private var shouldIntroduceUser: Bool = true
+  @State private var shouldIntroduceUser: Bool =
+  Cache.shared.getDefault(forKey: UserDefaultsKey.isFirstLaunch.rawValue) as? Bool ?? true
   
   var body: some Scene {
     WindowGroup {
@@ -27,7 +28,6 @@ struct Mercado_LibreApp: App {
           .sheet(isPresented: $shouldIntroduceUser) {
             FirstLaunchView(shouldBeShowing: $shouldIntroduceUser)
           }
-        
         Text("Favoritos")
           .tabItem {
             Image(systemName: "heart")
@@ -52,4 +52,3 @@ struct Mercado_LibreApp: App {
     }
   }
 }
-

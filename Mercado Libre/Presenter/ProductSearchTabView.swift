@@ -19,13 +19,18 @@ struct ProductSearchView: View {
     NavigationView {
       ZStack {
         VStack {
-          SearchProductTextfieldView(placeholder: viewModel.localizable.searchTextfieldTitle, text: $searchText)
-          Text(Cache.shared.userAddress)
+          HStack(alignment: .center) {
+            SearchProductTextfieldView(placeholder: viewModel.localizable.searchTextfieldTitle, text: $searchText)
+            Image(systemName: "cart")
+            Spacer()
+          }
+          ProductListUserAddress(userInfo: Cache.shared)
           ProductListView(viewModel: viewModel, searchText: $searchText)
-
+        }
+        if viewModel.productService.isLoading {
+          ProgressView()
         }
       }
-      //.navigationTitle(viewModel.localizable.productViewTitle)
       .background(Color.yellow)
     }
     .onChange(of: searchText) { newText in
@@ -39,6 +44,3 @@ struct ProductSearchView: View {
     }
   }
 }
-
-
-

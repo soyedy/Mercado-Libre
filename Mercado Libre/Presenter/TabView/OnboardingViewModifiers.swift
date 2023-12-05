@@ -1,5 +1,5 @@
 //
-//  FirstLaunchView.swift
+//  OnboardingViewModifiers.swift
 //  Mercado Libre
 //
 //  Created by John Edward Narvaez Londono on 4/12/23.
@@ -12,8 +12,8 @@ struct FirstLaunchView: View {
   @Binding var shouldBeShowing: Bool
   @State private var userName: String = ""
   @State private var userAddress: String = ""
-  @State private var userCountry: String = "MCO"
-  @State private var countriesList: [String] = ["MCO", "MLA", "MDO", "MCH"]
+  @State private var userCountry: String = "Colombia"
+  @State private var countriesList: [String] = ["Colombia", "Argentina", "Rep. Domincana", "Chile"]
   
   var body: some View {
     ZStack {
@@ -29,6 +29,7 @@ struct FirstLaunchView: View {
           .pickerStyle(.menu)
           Button("Finalizar", action: {
             shouldBeShowing = false
+            Cache.shared.saveDefault(forKey: UserDefaultsKey.isFirstLaunch.rawValue, value: false)
             saveValues()
           })
         }
@@ -50,3 +51,4 @@ struct FirstLaunchView: View {
     Cache.shared.shouldIntroduceUser = false
   }
 }
+
