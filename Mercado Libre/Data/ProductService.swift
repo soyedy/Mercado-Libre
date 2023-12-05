@@ -35,10 +35,13 @@ class ProductService: Searchable {
     do {
       let (data, _) = try await URLSession.shared.data(for: request)
       let decoder = JSONDecoder()
-        
-      let searchResponseDTO = try decoder.decode(ProductDTO.self, from: data)
-      let productsList: [Product] = searchResponseDTO.results
-      return productsList
+      
+      let searchResponseDTO = try? decoder.decode(ProductDTO.self, from: data)
+      if let products: [Product] = searchResponseDTO?.results {
+        return products
+      } else {
+        throw ServiceError.internalError
+      }
       
     } catch {
       throw ServiceError.serviceFailedFetching
