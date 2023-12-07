@@ -8,9 +8,9 @@
 import Foundation
 
 struct ProductDTO: Codable {
-    let siteID, countryDefaultTimeZone, query: String
-    let paging: Paging
-    let results: [Product]
+    let siteID, countryDefaultTimeZone, query: String?
+    let paging: Paging?
+    let results: [Product]?
     let installments: Installments?
     let winnerItemID: String?
     let catalogListing: Bool?
@@ -31,9 +31,9 @@ struct ProductDTO: Codable {
 
 // MARK: - Installments
 struct Installments: Codable {
-    let quantity: Int
-    let amount, rate: Double
-    let currencyID: String
+    let quantity: Int?
+    let amount, rate: Double?
+    let currencyID: String?
 
     enum CodingKeys: String, CodingKey {
         case quantity, amount, rate
@@ -43,7 +43,7 @@ struct Installments: Codable {
 
 // MARK: - Paging
 struct Paging: Codable {
-    let total, primaryResults, offset, limit: Int
+    let total, primaryResults, offset, limit: Int?
 
     enum CodingKeys: String, CodingKey {
         case total
@@ -54,32 +54,35 @@ struct Paging: Codable {
 
 // MARK: - Result
 struct Product: Codable {
-    let id, title, condition, thumbnailID: String
+    let id, title: String
+    let condition: String?
+    let thumbnailID: String?
     let catalogProductID, listingTypeID: String?
-    let permalink: String
-    let buyingMode, siteID, categoryID, domainID: String
-    let thumbnail: String
-    let currencyID: String
-    let orderBackend: Int
+    let permalink: String?
+    let buyingMode, siteID, categoryID, domainID: String?
+    let thumbnail: String?
+    let currencyID: String?
+    let orderBackend: Int?
     let price: Double
     let originalPrice: Int?
     let salePrice: String?
     let soldQuantity, availableQuantity, officialStoreID: Int?
     let officialStoreName: String?
-    let useThumbnailID, acceptsMercadopago: Bool
-    let tags: [String]
-    let shipping: Shipping
-    let stopTime: String
-    let seller: Seller
-    let sellerAddress: SellerAddress
-    let address: Address
-    let attributes: [Attribute]
-    let installments: Installments
+    let useThumbnailID, acceptsMercadopago: Bool?
+    let tags: [String]?
+    let shipping: Shipping?
+    let stopTime: String?
+    let seller: Seller?
+    let sellerAddress: SellerAddress?
+    let address: Address?
+    let attributes: [Attribute]?
+    let installments: Installments?
     let winnerItemID: String?
     let catalogListing: Bool?
     let discounts: String?
     let promotions: [String]?
     let inventoryID: String?
+    let variationsData: [String: VariationsDatum]?
 
     enum CodingKeys: String, CodingKey {
         case id, title, condition
@@ -112,12 +115,27 @@ struct Product: Codable {
         case catalogListing = "catalog_listing"
         case discounts, promotions
         case inventoryID = "inventory_id"
+        case variationsData = "variations_data"
+    }
+}
+
+// MARK: - VariationsDatum
+struct VariationsDatum: Codable {
+    let thumbnail: String?
+    let ratio, name: String?
+    let picturesQty: Int?
+    let inventoryID: String?
+
+    enum CodingKeys: String, CodingKey {
+        case thumbnail, ratio, name
+        case picturesQty = "pictures_qty"
+        case inventoryID = "inventory_id"
     }
 }
 
 // MARK: - Address
 struct Address: Codable {
-    let stateID, stateName, cityID, cityName: String
+    let stateID, stateName, cityID, cityName: String?
 
     enum CodingKeys: String, CodingKey {
         case stateID = "state_id"
@@ -130,10 +148,10 @@ struct Address: Codable {
 // MARK: - Attribute
 struct Attribute: Codable {
     let id, name, valueName: String?
-    let attributeGroupID, attributeGroupName: String
+    let attributeGroupID, attributeGroupName: String?
     let values: [Value]?
-    let source: Int
-    let valueType: String
+    let source: Int?
+    let valueType: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -148,7 +166,7 @@ struct Attribute: Codable {
 // MARK: - Value
 struct Value: Codable {
     let id, name: String?
-    let source: Int
+    let source: Int?
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -158,14 +176,14 @@ struct Value: Codable {
 
 // MARK: - Seller
 struct Seller: Codable {
-    let id: Int
-    let nickname: String
-    let carDealer, realEstateAgency, empty: Bool
-    let registrationDate: String
-    let tags: [String]
-    let carDealerLogo: String
-    let permalink: String
-    let sellerReputation: SellerReputation
+    let id: Int?
+    let nickname: String?
+    let carDealer, realEstateAgency, empty: Bool?
+    let registrationDate: String?
+    let tags: [String]?
+    let carDealerLogo: String?
+    let permalink: String?
+    let sellerReputation: SellerReputation?
 
     enum CodingKeys: String, CodingKey {
         case id, nickname
@@ -183,8 +201,8 @@ struct Seller: Codable {
 // MARK: - SellerReputation
 struct SellerReputation: Codable {
     let levelID, powerSellerStatus: String?
-    let transactions: Transactions
-    let metrics: Metrics
+    let transactions: Transactions?
+    let metrics: Metrics?
 
     enum CodingKeys: String, CodingKey {
         case levelID = "level_id"
@@ -195,8 +213,8 @@ struct SellerReputation: Codable {
 
 // MARK: - Metrics
 struct Metrics: Codable {
-    let sales: Sales
-    let claims, delayedHandlingTime, cancellations: Cancellations
+    let sales: Sales?
+    let claims, delayedHandlingTime, cancellations: Cancellations?
 
     enum CodingKeys: String, CodingKey {
         case sales, claims
@@ -207,35 +225,35 @@ struct Metrics: Codable {
 
 // MARK: - Cancellations
 struct Cancellations: Codable {
-    let period: String
-    let rate: Double
-    let value: Int
+    let period: String?
+    let rate: Double?
+    let value: Int?
 }
 
 // MARK: - Sales
 struct Sales: Codable {
-    let period: String
-    let completed: Int
+    let period: String?
+    let completed: Int?
 }
 
 // MARK: - Transactions
 struct Transactions: Codable {
-    let canceled, completed: Int
-    let period: String
-    let ratings: Ratings
-    let total: Int
+    let canceled, completed: Int?
+    let period: String?
+    let ratings: Ratings?
+    let total: Int?
 }
 
 // MARK: - Ratings
 struct Ratings: Codable {
-    let negative, neutral, positive: Double
+    let negative, neutral, positive: Double?
 }
 
 // MARK: - SellerAddress
 struct SellerAddress: Codable {
-    let comment, addressLine: String
+    let comment, addressLine: String?
     let id, latitude, longitude: String?
-    let country, state, city: City
+    let country, state, city: City?
 
     enum CodingKeys: String, CodingKey {
         case comment
@@ -246,14 +264,14 @@ struct SellerAddress: Codable {
 
 // MARK: - City
 struct City: Codable {
-    let id, name: String
+    let id, name: String?
 }
 
 // MARK: - Shipping
 struct Shipping: Codable {
-    let storePickUp, freeShipping: Bool
-    let logisticType, mode: String
-    let tags: [String]
+    let storePickUp, freeShipping: Bool?
+    let logisticType, mode: String?
+    let tags: [String]?
     let benefits, promise: String?
 
     enum CodingKeys: String, CodingKey {

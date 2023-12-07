@@ -24,7 +24,6 @@ class ProductService: Searchable {
     guard let baseURL = Constants.URLs.search(with: query.lowercased()) else {
       throw ServiceError.invalidUrlRequest
     }
-    print(baseURL)
     var request = URLRequest(url: baseURL)
     request.httpMethod = "GET"
     request.addValue("Bearer YOUR_TOKEN_HERE", forHTTPHeaderField: "Authorization")
@@ -42,7 +41,6 @@ class ProductService: Searchable {
       } else {
         throw ServiceError.internalError
       }
-      
     } catch {
       throw ServiceError.serviceFailedFetching
     }

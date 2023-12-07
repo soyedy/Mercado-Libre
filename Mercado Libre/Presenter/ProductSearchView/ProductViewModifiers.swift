@@ -12,15 +12,39 @@ struct ProductView: View {
   var product: Product
   
   var body: some View {
+    
     HStack(alignment: .center) {
-      ImageView(image: product.thumbnail,
-                frameWidth: 100,
-                frameHeight: 100)
-      VStack(alignment: .leading) {
-        Text(product.title)
-        Text(product.price.formattedWithInteger)
-          .fontWeight(.semibold)
+      if let thumbnail: String = product.thumbnail {
+        ImageView(image: thumbnail,
+                  frameWidth: 100,
+                  frameHeight: 100
+        )
       }
+      
+      VStack(alignment: .leading, spacing: 5) {
+        
+        Text(product.title)
+          .font(.system(size: 14, weight: .regular))
+        
+        if let shipping: Shipping = product.shipping,
+           let freeShipping: Bool = shipping.freeShipping,
+           freeShipping {
+          Text("Envío gratis")
+            .font(.system(size: 12, weight: .bold))
+            .foregroundColor(Color.green)
+        }
+        
+        Text("$ \(product.price.formattedWithInteger)")
+          .fontWeight(.semibold)
+        
+        if let seller: Seller = product.seller,
+           let nickname: String = seller.nickname {
+          Text("por \(nickname)")
+            .font(.system(size: 14, weight: .regular))
+            .foregroundColor(Color(.systemGray2))
+        }
+      }
+      .padding()
     }
   }
 }
@@ -91,12 +115,42 @@ struct ProductDetailView: View {
   var body: some View {
     ZStack {
       VStack {
-        Text(product.title)
-          .font(.system(.headline, design: .default, weight: .light))
+        HStack {
+          if let condition: String = product.condition {
+            Text(condition)
+              .font(.system(size: 14, weight: .bold, design: .rounded))
+          }
+          Spacer()
+        }
+        HStack {
+          Text(product.title)
+            .font(.system(.headline, design: .rounded, weight: .light))
+          Spacer()
+        }
         Divider()
-        ImageView(image: product.thumbnail, contentMode: .fit)
-        Text(String("$ \(product.price)"))
+        
+        if let variations = product.variationsData {
+          TabView {
+            ForEach(variations.map({ $0 }), id: \.key) { variation in
+              ImageView(image: variation.value.thumbnail ?? "", contentMode: .fit)
+            }
+          }
+          .tabViewStyle(.page)
+          .frame(height: 400)
+        } else if let thumbnail: String = product.thumbnail {
+          ImageView(image: thumbnail, contentMode: .fit)
+            .frame(height: 400)
+        } else {
+          EmptyView()
+            .frame(height: 400)
+        }
+        
+        Text(String("$ \(product.price.formattedWithInteger)"))
           .font(.system(.title, design: .rounded, weight: .semibold))
+        if let installments: Installments = product.installments,
+           let quantity: Int = installments.quantity {
+          Text("Hasta \(quantity) cuotas")
+        }
         Spacer()
       }
     }
@@ -109,6 +163,7 @@ struct ProductListUserAddress: View {
   
   var body: some View {
     HStack {
+      Image(systemName: "map.circle.fill")
       Text("\(userInfo.userAddress) - \(userInfo.userCountry.uppercased()) >")
         .font(.system(size: 12, weight: .light))
         .foregroundColor(Color(.black))
