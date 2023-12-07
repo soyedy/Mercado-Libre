@@ -24,6 +24,7 @@ class ProductService: Searchable {
     guard let baseURL = Constants.URLs.search(with: query.lowercased()) else {
       throw ServiceError.invalidUrlRequest
     }
+    print(baseURL)
     var request = URLRequest(url: baseURL)
     request.httpMethod = "GET"
     request.addValue("Bearer YOUR_TOKEN_HERE", forHTTPHeaderField: "Authorization")
@@ -34,8 +35,8 @@ class ProductService: Searchable {
     do {
       let (data, _) = try await URLSession.shared.data(for: request)
       let decoder = JSONDecoder()
-      
       let searchResponseDTO = try? decoder.decode(ProductDTO.self, from: data)
+      
       if let products: [Product] = searchResponseDTO?.results {
         return products
       } else {

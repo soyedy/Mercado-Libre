@@ -10,19 +10,15 @@ import SwiftUI
 
 struct ProductView: View {
   var product: Product
-  
   var body: some View {
-    
     HStack(alignment: .center) {
       if let thumbnail: String = product.thumbnail {
         ImageView(image: thumbnail,
                   frameWidth: 100,
-                  frameHeight: 100
-        )
+                  frameHeight: 100)
       }
       
       VStack(alignment: .leading, spacing: 5) {
-        
         Text(product.title)
           .font(.system(size: 14, weight: .regular))
         
@@ -52,7 +48,6 @@ struct ProductView: View {
 struct SearchProductTextfieldView: View {
   var placeholder: String
   @Binding var text: String
-  
   var body: some View {
     TextField(placeholder, text: $text)
       .padding(7)
@@ -64,12 +59,12 @@ struct SearchProductTextfieldView: View {
 
 struct ProductListView: View {
   var viewModel: ProductViewModel
+  @Binding var selectedTab: TabBarItem
   @Binding var searchText: String
-  
   var body: some View {
     List {
       ForEach(viewModel.productList.filter({ searchText.isEmpty ? true : $0.title.lowercased().contains(searchText.lowercased()) }), id: \.id) { product in
-        NavigationLink(destination: ProductDetailView(product: product)) {
+        NavigationLink(destination: ProductDetailView(product: product, selectedTab: $selectedTab)) {
           ProductView(product: product)
         }
       }
@@ -110,57 +105,8 @@ struct ImageView: View {
   }
 }
 
-struct ProductDetailView: View {
-  var product: Product
-  var body: some View {
-    ZStack {
-      VStack {
-        HStack {
-          if let condition: String = product.condition {
-            Text(condition)
-              .font(.system(size: 14, weight: .bold, design: .rounded))
-          }
-          Spacer()
-        }
-        HStack {
-          Text(product.title)
-            .font(.system(.headline, design: .rounded, weight: .light))
-          Spacer()
-        }
-        Divider()
-        
-        if let variations = product.variationsData {
-          TabView {
-            ForEach(variations.map({ $0 }), id: \.key) { variation in
-              ImageView(image: variation.value.thumbnail ?? "", contentMode: .fit)
-            }
-          }
-          .tabViewStyle(.page)
-          .frame(height: 400)
-        } else if let thumbnail: String = product.thumbnail {
-          ImageView(image: thumbnail, contentMode: .fit)
-            .frame(height: 400)
-        } else {
-          EmptyView()
-            .frame(height: 400)
-        }
-        
-        Text(String("$ \(product.price.formattedWithInteger)"))
-          .font(.system(.title, design: .rounded, weight: .semibold))
-        if let installments: Installments = product.installments,
-           let quantity: Int = installments.quantity {
-          Text("Hasta \(quantity) cuotas")
-        }
-        Spacer()
-      }
-    }
-    .padding()
-  }
-}
-
 struct ProductListUserAddress: View {
   @State var userInfo: Cache
-  
   var body: some View {
     HStack {
       Image(systemName: "map.circle.fill")

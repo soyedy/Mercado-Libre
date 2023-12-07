@@ -25,6 +25,7 @@
 		B83255EF2B17C1E0007A75E9 /* Mercado_LibreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83255EE2B17C1E0007A75E9 /* Mercado_LibreUITests.swift */; };
 		B83255F12B17C1E0007A75E9 /* Mercado_LibreUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83255F02B17C1E0007A75E9 /* Mercado_LibreUITestsLaunchTests.swift */; };
 		B83256022B17C3B1007A75E9 /* ProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83256012B17C3B1007A75E9 /* ProductService.swift */; };
+		B8660ED02B215BE200F43949 /* ProductDetailViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8660ECF2B215BE200F43949 /* ProductDetailViewModifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		B83255EE2B17C1E0007A75E9 /* Mercado_LibreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mercado_LibreUITests.swift; sourceTree = "<group>"; };
 		B83255F02B17C1E0007A75E9 /* Mercado_LibreUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mercado_LibreUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B83256012B17C3B1007A75E9 /* ProductService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductService.swift; sourceTree = "<group>"; };
+		B8660ECF2B215BE200F43949 /* ProductDetailViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModifiers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		B82129582B1E1ADA00F1B0A8 /* ProductDetailView */ = {
 			isa = PBXGroup;
 			children = (
+				B8660ECF2B215BE200F43949 /* ProductDetailViewModifiers.swift */,
 			);
 			path = ProductDetailView;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				B82129532B1E186200F1B0A8 /* Cache.swift in Sources */,
 				B822579E2B1825D800CC4E30 /* ProductViewModel.swift in Sources */,
 				B822579C2B17FAFC00CC4E30 /* ProductDTO.swift in Sources */,
+				B8660ED02B215BE200F43949 /* ProductDetailViewModifiers.swift in Sources */,
 				B8273CFB2B196A93009BFBFA /* Constants.swift in Sources */,
 				B82129552B1E18A900F1B0A8 /* Enums.swift in Sources */,
 			);

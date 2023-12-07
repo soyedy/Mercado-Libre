@@ -9,10 +9,13 @@ import SwiftUI
 
 struct ProductSearchView: View {
   @State private var searchText: String = ""
+  @Binding var selectedTab: TabBarItem
   @ObservedObject private var viewModel: ProductViewModel
   
-  init(viewModel: ProductViewModel) {
+  init(viewModel: ProductViewModel,
+       selectedTabBar: Binding<TabBarItem>) {
     self.viewModel = viewModel
+    self._selectedTab = selectedTabBar
   }
   
   var body: some View {
@@ -22,10 +25,16 @@ struct ProductSearchView: View {
           HStack(alignment: .center) {
             SearchProductTextfieldView(placeholder: viewModel.localizable.searchTextfieldTitle, text: $searchText)
             Image(systemName: "cart")
+              .onTapGesture {
+                selectedTab = .purchase
+              }
             Spacer()
           }
           ProductListUserAddress(userInfo: Cache.shared)
-          ProductListView(viewModel: viewModel, searchText: $searchText)
+            .onTapGesture {
+              selectedTab = .settings
+            }
+          ProductListView(viewModel: viewModel, selectedTab: $selectedTab, searchText: $searchText)
         }
         if viewModel.productService.isLoading {
           ProgressView()
