@@ -52,13 +52,14 @@ struct SearchProductTextfieldView: View {
     TextField(placeholder, text: $text)
       .padding(7)
       .background(Color(.systemGray6))
-      .cornerRadius(8)
+      .cornerRadius(30)
       .padding(.horizontal, 10)
+      .shadow(color: .gray, radius: 1, x: 0, y: 1)
   }
 }
 
 struct ProductListView: View {
-  var viewModel: ProductViewModel
+  @ObservedObject var viewModel: ProductViewModel
   @Binding var selectedTab: TabBarItem
   @Binding var searchText: String
   var body: some View {

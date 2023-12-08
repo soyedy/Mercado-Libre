@@ -19,9 +19,15 @@ struct Constants {
   enum URLs: String {
     case baseURL = "https://api.mercadolibre.com/"
     
-    
     static func search(with product: String) -> URL? {
       if let searchUrl: URL = URL(string: "\(baseURL.rawValue)sites/\(SiteId.MCO.rawValue)/search?q=\(product)") {
+        return searchUrl
+      }
+      return nil
+    }
+    
+    static func welcomeProducts() -> URL? {
+      if let searchUrl: URL = URL(string: "\(baseURL.rawValue)sites/\(SiteId.MCO.rawValue)/search?category=MCO1055") {
         return searchUrl
       }
       return nil

@@ -24,6 +24,8 @@ struct ProductSearchView: View {
         VStack {
           HStack(alignment: .center) {
             SearchProductTextfieldView(placeholder: viewModel.localizable.searchTextfieldTitle, text: $searchText)
+              .autocorrectionDisabled()
+            
             Image(systemName: "cart")
               .onTapGesture {
                 selectedTab = .purchase
@@ -34,21 +36,33 @@ struct ProductSearchView: View {
             .onTapGesture {
               selectedTab = .settings
             }
-          ProductListView(viewModel: viewModel, selectedTab: $selectedTab, searchText: $searchText)
+          ProductListView(viewModel: viewModel,
+                          selectedTab: $selectedTab,
+                          searchText: $searchText)
         }
-        if viewModel.productService.isLoading {
+        if viewModel.repository.remoteManager.productService.isLoading {
           ProgressView()
         }
       }
-      .background(Color.yellow)
+      .background(Color("MainColor"))
     }
     .onChange(of: searchText) { newText in
       Task {
         do {
           try await viewModel.fetchProducts(withName: newText)
         } catch {
-          print(ServiceError.serviceFailedFetching)
+          print(error.localizedDescription)
         }
+      }
+    }
+    .onAppear {
+      Task {
+        do {
+          try await viewModel.welcomeProducts()
+        } catch let error {
+          print(error.localizedDescription)
+        }
+        
       }
     }
   }

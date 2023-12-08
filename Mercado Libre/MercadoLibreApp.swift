@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 enum TabBarItem {
   case home
@@ -20,12 +21,16 @@ struct Mercado_LibreApp: App {
   @State private var shouldIntroduceUser: Bool =
   Cache.shared.getDefault(forKey: UserDefaultsKey.isFirstLaunch.rawValue) as? Bool ?? true
   @State private var selectedTab: TabBarItem = .home
+  let container = NSPersistentContainer(name: "MeliDB")
   
   var body: some Scene {
     WindowGroup {
       let productViewModel: ProductViewModel =
-      ProductViewModel(localizable: ProductLocalizables(),
-                       fetchProductService: ProductService()
+      ProductViewModel(
+        repository: ProductRepository(
+          localManager: LocalStorageRepository(container: container),
+          remoteManager: NetworkProductRepository(service: ProductService())),
+        localizable: ProductLocalizables()
       )
       
       TabView(selection: $selectedTab) {
