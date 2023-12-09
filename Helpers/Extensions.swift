@@ -14,8 +14,8 @@ extension String {
 }
 
 extension Double {
-    var formattedWithInteger: String {
-        let integerPart = Int(self)
-        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(integerPart) : String(self)
-    }
+  var formattedWithInteger: String {
+    let integerPart = Int(self)
+    return self.truncatingRemainder(dividingBy: 1) == 0 ? String(integerPart) : String(self)
+  }
 }

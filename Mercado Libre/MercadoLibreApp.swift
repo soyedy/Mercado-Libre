@@ -21,20 +21,24 @@ struct Mercado_LibreApp: App {
   @State private var shouldIntroduceUser: Bool =
   Cache.shared.getDefault(forKey: UserDefaultsKey.isFirstLaunch.rawValue) as? Bool ?? true
   @State private var selectedTab: TabBarItem = .home
-  let container = NSPersistentContainer(name: "MeliDB")
+  let repository: ProductRepository =
+  ProductRepository(
+    localManager: LocalStorageRepository(container: NSPersistentContainer(name: "MeliDB")),
+    remoteManager: NetworkProductRepository(service: ProductService()))
   
   var body: some Scene {
     WindowGroup {
       let productViewModel: ProductViewModel =
       ProductViewModel(
-        repository: ProductRepository(
-          localManager: LocalStorageRepository(container: container),
-          remoteManager: NetworkProductRepository(service: ProductService())),
+        usesCases:
+          ProductUseCasesImplementation(
+            fetchProductUseCase: FetchProductInteractor(repository: repository),
+            welcomeProductUseCase: WelcomeProductInteractor(repository: repository)),
         localizable: ProductLocalizables()
       )
       
       TabView(selection: $selectedTab) {
-        ProductSearchView(viewModel: productViewModel, selectedTabBar: $selectedTab)
+        HomeView(viewModel: productViewModel, selectedTabBar: $selectedTab)
           .tabItem {
             Image(systemName: "house")
             Text("Inicio")

@@ -19,26 +19,19 @@ protocol Searchable: ObservableObject {
 }
 
 class ProductService: Searchable {
-  @Published var isLoading = false
   
-  func search(with query: String) async throws -> [Product] {
-    guard let baseURL = Constants.URLs.search(with: query.lowercased()) else {
-      throw ServiceError.invalidUrlRequest
-    }
-    print(baseURL)
-    var request = URLRequest(url: baseURL)
+  private func fetchProducts(from url: URL) async throws -> [Product] {
+    var request = URLRequest(url: url)
     request.httpMethod = "GET"
     request.addValue("Bearer YOUR_TOKEN_HERE", forHTTPHeaderField: "Authorization")
-    
-    isLoading = true
-    defer { isLoading = false }
     
     do {
       let (data, _) = try await URLSession.shared.data(for: request)
       let decoder = JSONDecoder()
-      let searchResponseDTO = try? decoder.decode(ProductDTO.self, from: data)
       
-      if let products: [Product] = searchResponseDTO?.results {
+      let searchResponseDTO = try decoder.decode(SearchResult.self, from: data)
+      
+      if let products: [Product] = searchResponseDTO.results {
         return products
       } else {
         throw ServiceError.internalError
@@ -48,30 +41,17 @@ class ProductService: Searchable {
     }
   }
   
-  func welcomeProducts() async throws -> [Product] {
-    guard let baseURL = Constants.URLs.welcomeProducts() else {
+  func search(with productName: String) async throws -> [Product] {
+    guard let baseURL = try? Constants.URLs.search(with: productName) else {
       throw ServiceError.invalidUrlRequest
     }
-    print(baseURL)
-    var request = URLRequest(url: baseURL)
-    request.httpMethod = "GET"
-    request.addValue("Bearer YOUR_TOKEN_HERE", forHTTPHeaderField: "Authorization")
-    
-    isLoading = true
-    defer { isLoading = false }
-    
-    do {
-      let (data, _) = try await URLSession.shared.data(for: request)
-      let decoder = JSONDecoder()
-      let searchResponseDTO = try? decoder.decode(ProductDTO.self, from: data)
-      
-      if let products: [Product] = searchResponseDTO?.results {
-        return products
-      } else {
-        throw ServiceError.internalError
-      }
-    } catch {
-      throw ServiceError.serviceFailedFetching
+    return try await fetchProducts(from: baseURL)
+  }
+  
+  func welcomeProducts() async throws -> [Product] {
+    guard let baseURL = try? Constants.URLs.welcomeProducts() else {
+      throw ServiceError.invalidUrlRequest
     }
+    return try await fetchProducts(from: baseURL)
   }
 }

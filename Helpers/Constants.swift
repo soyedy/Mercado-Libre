@@ -7,30 +7,46 @@
 
 import Foundation
 
+enum URLBuildingError: Error {
+  case invalidURL
+}
+
 struct Constants {
-  static let defaultPageSize = 20
-  static let defaultTimeoutInterval = 60.0
+  static let defaultTitleSize = 18
+  static let defaultBodyTextSize = 14
   
-  enum SiteId: String {
-    case MLA = "MLA"
-    case MCO = "MCO"
-  }
-  
-  enum URLs: String {
-    case baseURL = "https://api.mercadolibre.com/"
+  struct URLs {
+    static let baseURL = URL(string: "https://api.mercadolibre.com/")!
     
-    static func search(with product: String) -> URL? {
-      if let searchUrl: URL = URL(string: "\(baseURL.rawValue)sites/\(SiteId.MCO.rawValue)/search?q=\(product)") {
-        return searchUrl
-      }
-      return nil
+    enum SiteId: String {
+      case MLA = "MLA"
+      case MCO = "MCO"
     }
     
-    static func welcomeProducts() -> URL? {
-      if let searchUrl: URL = URL(string: "\(baseURL.rawValue)sites/\(SiteId.MCO.rawValue)/search?category=MCO1055") {
-        return searchUrl
+    static func search(with product: String) throws -> URL {
+      var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
+      components.path = "/sites/\(SiteId.MCO.rawValue)/search"
+      components.queryItems = [
+        URLQueryItem(name: "q", value: product)
+      ]
+      
+      guard let url = components.url else {
+        throw URLBuildingError.invalidURL
       }
-      return nil
+      return url
+    }
+    
+    static func welcomeProducts() throws -> URL {
+      var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
+      components.path = "/sites/\(SiteId.MCO.rawValue)/search"
+      components.queryItems = [
+        URLQueryItem(name: "category", value: "MCO1055")
+      ]
+      
+      guard let url = components.url else {
+        throw URLBuildingError.invalidURL
+      }
+      return url
     }
   }
 }

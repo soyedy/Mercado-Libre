@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProductSearchView: View {
+struct HomeView: View {
   @State private var searchText: String = ""
   @Binding var selectedTab: TabBarItem
   @ObservedObject private var viewModel: ProductViewModel
@@ -40,7 +40,7 @@ struct ProductSearchView: View {
                           selectedTab: $selectedTab,
                           searchText: $searchText)
         }
-        if viewModel.repository.remoteManager.productService.isLoading {
+        if viewModel.isLoading {
           ProgressView()
         }
       }
@@ -58,11 +58,10 @@ struct ProductSearchView: View {
     .onAppear {
       Task {
         do {
-          try await viewModel.welcomeProducts()
+          try viewModel.productList.isEmpty ? await viewModel.fetchWelcomeProducts() : nil
         } catch let error {
           print(error.localizedDescription)
         }
-        
       }
     }
   }
