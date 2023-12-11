@@ -1,4 +1,6 @@
-# Mercado-Libre
+# Mercado Libre
+
+##SwiftUI / Clean Architecture / POP
 
 Para este challenge, intenté implementar una arquitectura 'Clean Architecture' usando también MVVM para gestionar las interacciones del usuario donde se mantuvo la estricta interacción de cada capa con su simil correspondiente, por ejemplo: la capa de presentación no debería tener contacto con la capa de datos. En la app se cumple con los requerimientos mínimos como son la búsqueda de productos por nombre, la visualización de resultados y el detalle de producto, como también el manejo de errores y la responsividad. Para la prueba, se intentó al máximo mantener la limpieza del código mediante la inyección de dependencias, manejo del acoplamiento y cohesión, programación orientada a protocolos y encapsulamiento.
 
