@@ -30,3 +30,17 @@ enum UserCountry: String {
     }
   }
 }
+
+enum TabBarItem {
+  case home
+  case favourite
+  case purchase
+  case notifications
+  case settings
+}
+
+enum ServiceError: Error {
+  case serviceFailedFetching
+  case noResultsFound
+  case invalidUrlRequest
+}

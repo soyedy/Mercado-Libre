@@ -7,28 +7,32 @@
 
 import Foundation
 
-class Cache {
+class Cache: ObservableObject {
   static let shared: Cache = Cache()
   private init() {}
   
-  var shouldIntroduceUser: Bool {
-    get { UserDefaults.standard.bool(forKey: UserDefaultsKey.isFirstLaunch.rawValue )}
-    set { UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.isFirstLaunch.rawValue )}
+  @Published var shouldIntroduceUser: Bool = UserDefaults.standard.bool(forKey: UserDefaultsKey.isFirstLaunch.rawValue) {
+    didSet {
+        UserDefaults.standard.set(shouldIntroduceUser, forKey: UserDefaultsKey.userName.rawValue)
+    }
   }
   
-  var userName: String {
-    get { UserDefaults.standard.string(forKey: UserDefaultsKey.userName.rawValue) ?? "" }
-    set { UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.userName.rawValue )}
+  @Published var userName: String = UserDefaults.standard.string(forKey: UserDefaultsKey.userName.rawValue) ?? "" {
+    didSet {
+        UserDefaults.standard.set(userName, forKey: UserDefaultsKey.userName.rawValue)
+    }
   }
   
-  var userAddress: String {
-    get { UserDefaults.standard.string(forKey: UserDefaultsKey.userAdress.rawValue) ?? "" }
-    set { UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.userAdress.rawValue )}
+  @Published var userAddress: String = UserDefaults.standard.string(forKey: UserDefaultsKey.userAdress.rawValue) ?? "" {
+    didSet {
+        UserDefaults.standard.set(userAddress, forKey: UserDefaultsKey.userAdress.rawValue)
+    }
   }
   
-  var userCountry: String {
-    get { UserDefaults.standard.string(forKey: UserDefaultsKey.userCountry.rawValue) ?? "" }
-    set { UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.userCountry.rawValue )}
+  @Published var userCountry: String = UserDefaults.standard.string(forKey: UserDefaultsKey.userCountry.rawValue) ?? "" {
+    didSet {
+        UserDefaults.standard.set(userCountry, forKey: UserDefaultsKey.userCountry.rawValue)
+    }
   }
   
   func saveDefault(forKey key: String, value: Any) {
