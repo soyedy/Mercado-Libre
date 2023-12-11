@@ -56,6 +56,7 @@ struct HomeView: View {
       }
     }
     .onAppear {
+      viewModel.requestLocationServices()
       Task {
         do {
           try viewModel.productList.isEmpty ? await viewModel.fetchWelcomeProducts() : nil

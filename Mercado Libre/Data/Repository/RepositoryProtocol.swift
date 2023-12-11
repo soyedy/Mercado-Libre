@@ -8,11 +8,14 @@
 import Foundation
 
 protocol ProductsRepositoryProtocol {
+  var localManager: LocalStorageRepository { get }
+  var remoteManager: NetworkProductRepository { get }
+  
   func getProducts(name: String) async throws -> [Product]
   func welcomeProducts() async throws -> [Product]
 }
 
-class ProductRepository: ProductsRepositoryProtocol {
+struct ProductRepository: ProductsRepositoryProtocol {
   var localManager: LocalStorageRepository
   var remoteManager: NetworkProductRepository
   

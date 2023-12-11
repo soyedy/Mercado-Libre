@@ -7,13 +7,6 @@
 
 import Foundation
 
-enum ServiceError: Error {
-  case serviceFailedFetching
-  case noResultsFound
-  case invalidUrlRequest
-  case internalError
-}
-
 protocol Searchable: ObservableObject {
   func search(with query: String) async throws -> [Product]
 }
@@ -34,7 +27,7 @@ class ProductService: Searchable {
       if let products: [Product] = searchResponseDTO.results {
         return products
       } else {
-        throw ServiceError.internalError
+        throw ServiceError.noResultsFound
       }
     } catch {
       throw ServiceError.serviceFailedFetching

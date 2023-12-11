@@ -107,11 +107,11 @@ struct ImageView: View {
 }
 
 struct ProductListUserAddress: View {
-  @State var userInfo: Cache
+  var userInfo: Cache
   var body: some View {
     HStack {
       Image(systemName: "map.circle.fill")
-      Text("\(userInfo.userAddress) - \(userInfo.userCountry.uppercased()) >")
+      Text("\(userInfo.userCountry) - \(userInfo.userCountry) >")
         .font(.system(size: 12, weight: .light))
         .foregroundColor(Color(.black))
         .multilineTextAlignment(.leading)
