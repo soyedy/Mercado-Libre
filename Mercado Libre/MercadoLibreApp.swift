@@ -8,14 +8,6 @@
 import SwiftUI
 import CoreData
 
-enum TabBarItem {
-  case home
-  case favourite
-  case purchase
-  case notifications
-  case settings
-}
-
 @main
 struct Mercado_LibreApp: App {
   @State private var shouldIntroduceUser: Bool =
@@ -23,7 +15,7 @@ struct Mercado_LibreApp: App {
   @State private var selectedTab: TabBarItem = .home
   let repository: ProductRepository =
   ProductRepository(
-    localManager: LocalStorageRepository(container: NSPersistentContainer(name: "MeliDB")),
+    localManager: LocalStorageRepository(container: NSPersistentContainer(name: "")),
     remoteManager: NetworkProductRepository(service: ProductService()))
   
   var body: some Scene {
