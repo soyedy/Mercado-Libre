@@ -25,14 +25,17 @@ struct HomeView: View {
           HStack(alignment: .center) {
             SearchProductTextfieldView(placeholder: viewModel.localizable.searchTextfieldTitle, text: $searchText)
               .autocorrectionDisabled()
+              .accessibility(identifier: "ProductSearchField")
             
             Image(systemName: "cart")
+              .accessibility(identifier: "CartButton")
               .onTapGesture {
                 selectedTab = .purchase
               }
             Spacer()
           }
           ProductListUserAddress(userInfo: Cache.shared)
+            .accessibility(identifier: "UserAddress")
             .onTapGesture {
               selectedTab = .settings
             }

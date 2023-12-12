@@ -189,10 +189,8 @@
 				B8273CF12B19504B009BFBFA /* Localizable.strings */,
 				B83255D22B17C1DD007A75E9 /* MercadoLibreApp.swift */,
 				B83256002B17C387007A75E9 /* Data */,
-				B83256012B17C3B1007A75E9 /* ProductService.swift */,
 				B83255FF2B17C2B0007A75E9 /* Domain */,
 				B83255FE2B17C2A5007A75E9 /* Presentation */,
-				B83255D42B17C1DD007A75E9 /* HomeView.swift */,
 				B83255D62B17C1E0007A75E9 /* Assets.xcassets */,
 				B83255D82B17C1E0007A75E9 /* Mercado_Libre.entitlements */,
 				B83255D92B17C1E0007A75E9 /* Preview Content */,
@@ -229,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				B867456C2B24C9F000791E8A /* Views */,
+				B83255D42B17C1DD007A75E9 /* HomeView.swift */,
 				B86745652B24C8DF00791E8A /* ViewModel */,
 			);
 			path = Presentation;
@@ -247,6 +246,7 @@
 		B83256002B17C387007A75E9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				B83256012B17C3B1007A75E9 /* ProductService.swift */,
 				B82AD80B2B2668B200536C2D /* Repository */,
 			);
 			path = Data;
