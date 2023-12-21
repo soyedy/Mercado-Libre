@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ProductDetailView: View {
   var product: Product
+  @State private var showMap: Bool = false
   @Binding var selectedTab: TabBarItem
   @State var selectedQuantity: String = "1"
   var quantityArray: [String] {
@@ -114,14 +115,22 @@ struct ProductDetailView: View {
             foregroundColor: .white,
             action: {
               selectedTab = .purchase
+              
             })
           DetailProductButton(
-            title: "Agregar al carrito",
+            title: "Ver el mapa",
             backgroundColor: .blue.opacity(0.2),
             foregroundColor: .blue,
             action: {
+              showMap = true
               selectedTab = .purchase
             })
+          .sheet(isPresented: $showMap, content: {
+            NavigationView {
+              MapViewRepresentable(latitude: 34.4554, longitude: 70.171168)
+                .edgesIgnoringSafeArea(.all)
+            }
+          })
           
         }
       }

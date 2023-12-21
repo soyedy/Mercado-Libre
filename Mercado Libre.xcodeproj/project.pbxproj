@@ -32,6 +32,7 @@
 		B867456E2B24CEA000791E8A /* ProductUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867456D2B24CEA000791E8A /* ProductUseCases.swift */; };
 		B86745702B24CFAF00791E8A /* FetchProductInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867456F2B24CFAF00791E8A /* FetchProductInteractor.swift */; };
 		B86745722B24CFDF00791E8A /* WelcomeProductInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86745712B24CFDF00791E8A /* WelcomeProductInteractor.swift */; };
+		B8A07F422B34AD4B001E435E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A07F412B34AD4B001E435E /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		B867456D2B24CEA000791E8A /* ProductUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductUseCases.swift; sourceTree = "<group>"; };
 		B867456F2B24CFAF00791E8A /* FetchProductInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchProductInteractor.swift; sourceTree = "<group>"; };
 		B86745712B24CFDF00791E8A /* WelcomeProductInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeProductInteractor.swift; sourceTree = "<group>"; };
+		B8A07F412B34AD4B001E435E /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				B8660ECF2B215BE200F43949 /* ProductDetailViewModifiers.swift */,
+				B8A07F412B34AD4B001E435E /* MapView.swift */,
 			);
 			path = ProductDetailView;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				B8660ED02B215BE200F43949 /* ProductDetailViewModifiers.swift in Sources */,
 				B86745672B24C90400791E8A /* RepositoryProtocol.swift in Sources */,
 				B867456E2B24CEA000791E8A /* ProductUseCases.swift in Sources */,
+				B8A07F422B34AD4B001E435E /* MapView.swift in Sources */,
 				B8273CFB2B196A93009BFBFA /* Constants.swift in Sources */,
 				B82129552B1E18A900F1B0A8 /* Enums.swift in Sources */,
 			);
